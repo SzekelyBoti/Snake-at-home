@@ -1,0 +1,13 @@
+#gameCanvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 5px solid black; /* visual walls */
+}
+
+#score {
+    text-align: center;
+    font-size: 140px;
+    font-family: 'Antic Slab', serif;
+}
