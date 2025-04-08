@@ -3,11 +3,36 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 5px solid black; /* visual walls */
+    border: 5px solid black;
 }
-
 #score {
     text-align: center;
     font-size: 140px;
     font-family: 'Antic Slab', serif;
 }
+
+#gameOverOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    display: none;
+}
+
+#gameOverOverlay.show {
+    display: flex;
+}
+
+#gameOverContent {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    font-family: 'Antic Slab', serif;
+}
+
