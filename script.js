@@ -23,14 +23,12 @@ let dx = 10;
 // Vertical velocity
 let dy = 0;
 
-// Get the canvas element
 const gameCanvas = document.getElementById("gameCanvas");
 // Return a two dimensional drawing context
 const ctx = gameCanvas.getContext("2d");
 
 main();
 createFood();
-// Call changeDirection whenever a key is pressed
 document.addEventListener("keydown", changeDirection);
 
 function main() {
@@ -47,14 +45,10 @@ function main() {
     }, GAME_SPEED)
 }
 function clearCanvas() {
-    //  Select the colour to fill the drawing
     ctx.fillStyle = CANVAS_BACKGROUND_COLOUR;
-    //  Select the colour for the border of the canvas
     ctx.strokestyle = CANVAS_BORDER_COLOUR;
-
-    // Draw a "filled" rectangle to cover the entire canvas
+    
     ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
-    // Draw a "border" around the entire canvas
     ctx.strokeRect(0, 0, gameCanvas.width, gameCanvas.height);
 }
 
