@@ -13,7 +13,7 @@ const walls = [
     ...Array.from({length: 28}, (_, i) => ({x: 0, y: (i + 1) * 10})),
     ...Array.from({length: 28}, (_, i) => ({x: 290, y: (i + 1) * 10})),
 
-    // Inner maze walls
+   // Inner maze walls
     {x: 40, y: 40}, {x: 50, y: 40}, {x: 60, y: 40}, {x: 70, y: 40}, {x: 80, y: 40},
     {x: 80, y: 50}, {x: 80, y: 60}, {x: 80, y: 70}, {x: 80, y: 80},
     {x: 90, y: 80}, {x: 100, y: 80}, {x: 110, y: 80}, {x: 120, y: 80},
