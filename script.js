@@ -74,6 +74,24 @@ function clearCanvas() {
     ctx.strokeRect(0, 0, gameCanvas.width, gameCanvas.height);
 }
 
+function restartGame() {
+    score = 0;
+    document.getElementById('score').innerHTML = score;
+    dx = 10;
+    dy = 0;
+    snake = [
+        {x: 150, y: 150},
+        {x: 140, y: 150},
+        {x: 130, y: 150},
+        {x: 120, y: 150},
+        {x: 110, y: 150}
+    ];
+    changingDirection = false;
+    document.getElementById("gameOverOverlay").classList.remove("show");
+    createFood();
+    main();
+}
+
 function drawWalls() {
     ctx.fillStyle = 'gray';
     ctx.strokeStyle = 'black';
@@ -106,7 +124,10 @@ function advanceSnake() {
 
 function didGameEnd() {
     for (let i = 4; i < snake.length; i++) {
-        if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) return true
+        if (snake[i].x === snake[0].x && snake[i].y === snake[0].y){
+            showGameOver();
+            return true;
+        }
     }
 
     const hitLeftWall = snake[0].x < 0;
@@ -116,8 +137,19 @@ function didGameEnd() {
 
     const hitMazeWall = walls.some(wall => wall.x === snake[0].x && wall.y === snake[0].y);
 
-    return hitLeftWall || hitRightWall || hitToptWall || hitBottomWall || hitMazeWall;
+    if(hitLeftWall || hitRightWall || hitToptWall || hitBottomWall || hitMazeWall){
+        showGameOver();
+        return true;
+    }
+    return false;
 }
+
+function showGameOver() {
+    document.getElementById("finalScore").innerText = score;
+    document.getElementById("restartBtn").addEventListener("click", restartGame);
+    document.getElementById("gameOverOverlay").classList.add("show");
+}
+
 function randomTen(min, max) {
     return Math.round((Math.random() * (max-min) + min) / 10) * 10;
 }
