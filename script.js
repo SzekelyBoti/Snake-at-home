@@ -91,7 +91,6 @@ function restartGame() {
     createFood();
     main();
 }
-
 function drawWalls() {
     ctx.fillStyle = 'gray';
     ctx.strokeStyle = 'black';
