@@ -6,6 +6,28 @@ const SNAKE_BORDER_COLOUR = 'darkgreen';
 const FOOD_COLOUR = 'red';
 const FOOD_BORDER_COLOUR = 'darkred';
 
+const walls = [
+    // Outer border walls
+    ...Array.from({length: 30}, (_, i) => ({x: i * 10, y: 0})),
+    ...Array.from({length: 30}, (_, i) => ({x: i * 10, y: 290})),
+    ...Array.from({length: 28}, (_, i) => ({x: 0, y: (i + 1) * 10})),
+    ...Array.from({length: 28}, (_, i) => ({x: 290, y: (i + 1) * 10})),
+
+    // Inner maze walls
+    {x: 40, y: 40}, {x: 50, y: 40}, {x: 60, y: 40}, {x: 70, y: 40}, {x: 80, y: 40},
+    {x: 80, y: 50}, {x: 80, y: 60}, {x: 80, y: 70}, {x: 80, y: 80},
+    {x: 90, y: 80}, {x: 100, y: 80}, {x: 110, y: 80}, {x: 120, y: 80},
+    
+    {x: 180, y: 100}, {x: 190, y: 100}, {x: 200, y: 100}, {x: 210, y: 100}, {x: 220, y: 100},
+    {x: 180, y: 110}, {x: 180, y: 120}, {x: 180, y: 130}, {x: 180, y: 140},
+    
+    {x: 60, y: 170}, {x: 70, y: 170}, {x: 80, y: 170}, {x:90, y: 170}, {x: 100, y: 170},
+    {x: 60, y: 180}, {x: 60, y: 190}, {x: 60, y: 200}, {x:60, y: 210}, {x: 60, y: 220},
+    {x: 70, y: 220}, {x: 80, y: 220}, {x: 90, y: 220}, {x:100, y: 220}, {x: 100, y: 220},
+
+    {x: 170, y: 220}, {x: 180, y: 220}, {x: 190, y: 220}, {x:200, y: 220}, {x: 210, y: 220},
+];
+
 let snake = [
     {x: 150, y: 150},
     {x: 140, y: 150},
@@ -24,7 +46,6 @@ let dx = 10;
 let dy = 0;
 
 const gameCanvas = document.getElementById("gameCanvas");
-// Return a two dimensional drawing context
 const ctx = gameCanvas.getContext("2d");
 
 main();
@@ -38,6 +59,7 @@ function main() {
         changingDirection = false;
         clearCanvas();
         drawFood();
+        drawWalls();
         advanceSnake();
         drawSnake();
         
@@ -50,6 +72,15 @@ function clearCanvas() {
     
     ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
     ctx.strokeRect(0, 0, gameCanvas.width, gameCanvas.height);
+}
+
+function drawWalls() {
+    ctx.fillStyle = 'gray';
+    ctx.strokeStyle = 'black';
+    walls.forEach(wall => {
+        ctx.fillRect(wall.x, wall.y, 10, 10);
+        ctx.strokeRect(wall.x, wall.y, 10, 10);
+    });
 }
 
 function drawFood() {
@@ -83,7 +114,9 @@ function didGameEnd() {
     const hitToptWall = snake[0].y < 0;
     const hitBottomWall = snake[0].y > gameCanvas.height - 10;
 
-    return hitLeftWall || hitRightWall || hitToptWall || hitBottomWall
+    const hitMazeWall = walls.some(wall => wall.x === snake[0].x && wall.y === snake[0].y);
+
+    return hitLeftWall || hitRightWall || hitToptWall || hitBottomWall || hitMazeWall;
 }
 function randomTen(min, max) {
     return Math.round((Math.random() * (max-min) + min) / 10) * 10;
@@ -92,10 +125,13 @@ function randomTen(min, max) {
 function createFood() {
     foodX = randomTen(0, gameCanvas.width - 10);
     foodY = randomTen(0, gameCanvas.height - 10);
-    snake.forEach(function isFoodOnSnake(part) {
-        const foodIsoNsnake = part.x == foodX && part.y == foodY;
-        if (foodIsoNsnake) createFood();
-    });
+    
+    const isOnSnake = snake.some(part => part.x === foodX && part.y === foodY);
+    const isOnWall = walls.some(wall => wall.x === foodX && wall.y === foodY);
+
+    if (isOnSnake || isOnWall) {
+        createFood();
+    }
 }
 
 function drawSnake() {
