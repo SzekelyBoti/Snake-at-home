@@ -1,10 +1,10 @@
 const GAME_SPEED = 100;
-const CANVAS_BORDER_COLOUR = 'black';
-const CANVAS_BACKGROUND_COLOUR = "white";
-const SNAKE_COLOUR = 'lightgreen';
-const SNAKE_BORDER_COLOUR = 'darkgreen';
-const FOOD_COLOUR = 'red';
-const FOOD_BORDER_COLOUR = 'darkred';
+const CANVAS_BORDER_COLOUR = '#00ffff';
+const CANVAS_BACKGROUND_COLOUR = '#0d0d0d';
+const SNAKE_COLOUR = '#00ffff';
+const SNAKE_BORDER_COLOUR = '#001f1f';
+const FOOD_COLOUR = '#ff00ff';
+const FOOD_BORDER_COLOUR = '#330033';
 
 const walls = [
     // Outer border walls
@@ -36,13 +36,10 @@ let snake = [
     {x: 110, y: 150}
 ]
 let score = 0;
-// When set to true the snake is changing direction
 let changingDirection = false;
 let foodX;
 let foodY;
-// Horizontal velocity
 let dx = 10;
-// Vertical velocity
 let dy = 0;
 
 const gameCanvas = document.getElementById("gameCanvas");
@@ -52,7 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("keydown", changeDirection);
-
 
 function main() {
     if (didGameEnd()) return;
@@ -79,7 +75,6 @@ function startGame(){
 function clearCanvas() {
     ctx.fillStyle = CANVAS_BACKGROUND_COLOUR;
     ctx.strokestyle = CANVAS_BORDER_COLOUR;
-    
     ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
     ctx.strokeRect(0, 0, gameCanvas.width, gameCanvas.height);
 }
@@ -101,6 +96,7 @@ function restartGame() {
     createFood();
     main();
 }
+
 function drawWalls() {
     ctx.fillStyle = 'gray';
     ctx.strokeStyle = 'black';
@@ -112,7 +108,7 @@ function drawWalls() {
 
 function drawFood() {
     ctx.fillStyle = FOOD_COLOUR;
-    ctx.strokestyle = FOOD_BORDER_COLOUR;
+    ctx.strokeStyle = FOOD_BORDER_COLOUR;
     ctx.fillRect(foodX, foodY, 10, 10);
     ctx.strokeRect(foodX, foodY, 10, 10);
 }
@@ -181,7 +177,7 @@ function drawSnake() {
 
 function drawSnakePart(snakePart) {
     ctx.fillStyle = SNAKE_COLOUR;
-    ctx.strokestyle = SNAKE_BORDER_COLOUR;
+    ctx.strokeStyle = SNAKE_BORDER_COLOUR;
     ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
     ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
 }
