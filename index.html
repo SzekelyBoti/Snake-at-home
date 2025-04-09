@@ -10,11 +10,20 @@
         <div id="score">0</div>
         <canvas id="gameCanvas" width="300" height="300"></canvas>
         <script src="script.js"></script>
-        <div id="gameOverOverlay" class="hidden">
+        <div id="gameOverOverlay">
             <div id="gameOverContent">
                 <h1>Game Over</h1>
                 <p>Your Score: <span id="finalScore">0</span></p>
                 <button id="restartBtn">Restart</button>
+            </div>
+        </div>
+        <div id="gameStartOverlay" class="show">
+            <div id="gameStartContent">
+                <h1>Snake at home</h1>
+                <p>- Use arrow keys to change direction</p>
+                <p>- Collect food to earn points</p>
+                <p>- Avoid walls</p>
+                <button id="startBtn">Start</button>
             </div>
         </div>
     </body>
