@@ -47,10 +47,12 @@ let dy = 0;
 
 const gameCanvas = document.getElementById("gameCanvas");
 const ctx = gameCanvas.getContext("2d");
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("startBtn").addEventListener("click", startGame);
+});
 
-main();
-createFood();
 document.addEventListener("keydown", changeDirection);
+
 
 function main() {
     if (didGameEnd()) return;
@@ -66,6 +68,14 @@ function main() {
         main();
     }, GAME_SPEED)
 }
+
+function startGame(){
+    document.getElementById("gameStartOverlay").classList.remove("show");
+    console.log("start game");
+    createFood();
+    main();
+}
+
 function clearCanvas() {
     ctx.fillStyle = CANVAS_BACKGROUND_COLOUR;
     ctx.strokestyle = CANVAS_BORDER_COLOUR;

@@ -11,7 +11,8 @@
     font-family: 'Antic Slab', serif;
 }
 
-#gameOverOverlay {
+#gameOverOverlay ,
+#gameStartOverlay{
     position: fixed;
     top: 0;
     left: 0;
@@ -24,11 +25,13 @@
     display: none;
 }
 
-#gameOverOverlay.show {
+#gameOverOverlay.show ,
+#gameStartOverlay.show {
     display: flex;
 }
 
-#gameOverContent {
+#gameOverContent ,
+#gameStartOverlay{
     background-color: white;
     padding: 40px;
     border-radius: 10px;
