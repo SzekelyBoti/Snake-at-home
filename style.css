@@ -1,18 +1,28 @@
+body {
+    background-color: #000000;
+    font-family: 'Orbitron', sans-serif;
+    color: #00ffff;
+}
+
 #gameCanvas {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 5px solid black;
-}
-#score {
-    text-align: center;
-    font-size: 140px;
-    font-family: 'Antic Slab', serif;
+    border: 5px solid #00ffff;
+    background-color: #0d0d0d;
+    box-shadow: 0 0 20px #00ffff;
 }
 
-#gameOverOverlay ,
-#gameStartOverlay{
+#score {
+    text-align: center;
+    font-size: 60px;
+    color: #00ffff;
+    text-shadow: 0 0 10px #00ffff;
+}
+
+#gameOverOverlay,
+#gameStartOverlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -23,19 +33,45 @@
     justify-content: center;
     z-index: 10;
     display: none;
+    box-shadow: 0 0 20px #00ffff;
 }
 
-#gameOverOverlay.show ,
+#gameOverOverlay.show,
 #gameStartOverlay.show {
     display: flex;
 }
 
-#gameOverContent ,
-#gameStartOverlay{
-    background-color: white;
+#gameOverContent,
+#gameStartOverlay {
+    background-color: #111111;
     padding: 40px;
     border-radius: 10px;
     text-align: center;
-    font-family: 'Antic Slab', serif;
+    font-family: 'Orbitron', sans-serif;
+    color: #00ffff;
+    border: 2px solid #00ffff;
+    box-shadow: 0 0 20px #00ffff;
+    text-shadow: 0 0 5px #00ffff;
 }
+
+button {
+    background-color: transparent;
+    border: 2px solid #00ffff;
+    color: #00ffff;
+    font-size: 20px;
+    font-family: 'Orbitron', sans-serif;
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-shadow: 0 0 5px #00ffff;
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #00ffff;
+    color: #000000;
+    box-shadow: 0 0 15px #00ffff;
+}
+
+
 
